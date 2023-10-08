@@ -1,6 +1,18 @@
 # Vital-Sound-Imitator-AI
 AI that will hear a synthesizer sound and recreate it with vital synth
 
+How do I get a trainable amount of sound matched with its parameters??
+Do I automate? 
+  -Research into how synth generate sound.   
+  -look at how parameters are passed into the synth as what datatypes
+  -look to automate the process and save input and output as a pair of files 
+Look at .vital files
+
+Probably easier than expected, will just have to process .vital files 
+  -use free give presets first
+ -do need way more
+  
+
 FEATURES: 
 Properties of a sound  (further research)
 
@@ -24,3 +36,4 @@ SMP
 5. Pan%         (-100,100)
 6. Filter/Effect 
 
+Wait I should just get the data from vital itself... stop calculating. 
