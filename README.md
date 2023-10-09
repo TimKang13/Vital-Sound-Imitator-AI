@@ -8,10 +8,27 @@ Do I automate?
   -look to automate the process and save input and output as a pair of files 
 Look at .vital files
 
-Probably easier than expected, will just have to process .vital files 
+Probably easier than expected, will just have to process .vital files (in json)
   -use free give presets first
  -do need way more
-  
+
+ UPDATE: vital file has wave form data encoded into it.
+ json WaveSourceKeyframe::stateToJson() {
+  String encoded = Base64::toBase64(wave_frame_->time_domain, sizeof(float) * vital::WaveFrame::kWaveformSize);
+  json data = WavetableKeyframe::stateToJson();
+  data["wave_data"] = encoded.toStdString();
+  return data;
+}
+
+void WaveSourceKeyframe::jsonToState(json data) {
+  WavetableKeyframe::jsonToState(data);
+
+  MemoryOutputStream decoded(sizeof(float) * vital::WaveFrame::kWaveformSize);
+  std::string wave_data = data["wave_data"];
+  Base64::convertFromBase64(decoded, wave_data);
+  memcpy(wave_frame_->time_domain, decoded.getData(), sizeof(float) * vital::WaveFrame::kWaveformSize);
+  wave_frame_->toFrequencyDomain();
+}
 
 FEATURES: 
 Properties of a sound  (further research)
